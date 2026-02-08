@@ -8,7 +8,7 @@ import DisplayLottie from "../../components/displayLottie/DisplayLottie";
 import StyleContext from "../../contexts/StyleContext";
 
 export default function Skills() {
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

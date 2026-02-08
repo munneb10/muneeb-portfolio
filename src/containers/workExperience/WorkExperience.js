@@ -6,7 +6,7 @@ import {Fade} from "react-reveal";
 import StyleContext from "../../contexts/StyleContext";
 
 export default function WorkExperience() {
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
   if (workExperiences.display) {
     return (
       <div id="experience">

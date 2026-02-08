@@ -6,7 +6,7 @@ import {Fade} from "react-reveal";
 import StyleContext from "../../contexts/StyleContext";
 
 export default function Talks() {
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
   if (!talkSection.display) {
     return null;
   }

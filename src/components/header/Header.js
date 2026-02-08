@@ -15,7 +15,7 @@ import {
 } from "../../portfolio";
 
 function Header() {
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
   const viewExperience = workExperiences.display;
   const viewOpenSource = openSource.display;
   const viewSkills = skillsSection.display;

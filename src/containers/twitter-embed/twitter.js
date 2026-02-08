@@ -19,7 +19,7 @@ function timeOut() {
 var widthScreen = window.screen.width;
 
 export default function Twitter() {
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
 
   if (!twitterDetails.display) {
     return null;

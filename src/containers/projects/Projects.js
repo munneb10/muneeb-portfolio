@@ -12,7 +12,7 @@ export default function Projects() {
   const renderLoader = () => <Loading />;
   const [repo, setrepo] = useState([]);
   // todo: remove useContex because is not supported
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
 
   useEffect(() => {
     const getRepoData = () => {

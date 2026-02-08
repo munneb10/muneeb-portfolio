@@ -6,7 +6,7 @@ import {Fade} from "react-reveal";
 import StyleContext from "../../contexts/StyleContext";
 
 export default function Contact() {
-  const {isDark} = useContext(StyleContext);
+  const {isDark} = false;
 
   return (
     <Fade bottom duration={1000} distance="20px">
