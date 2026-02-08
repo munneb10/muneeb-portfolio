@@ -15,10 +15,11 @@ export default function Achievement() {
         <div className="achievement-main-div">
           <div className="achievement-header">
             <h1
+            style={{marginTop: '30px'}}
               className={
                 isDark
-                  ? "dark-mode heading achievement-heading"
-                  : "heading achievement-heading"
+                  ? "dark-mode heading achievement-heading text-centre"
+                  : "heading achievement-heading text-centre"
               }
             >
               {achievementSection.title}
@@ -26,8 +27,8 @@ export default function Achievement() {
             <p
               className={
                 isDark
-                  ? "dark-mode subTitle achievement-subtitle"
-                  : "subTitle achievement-subtitle"
+                  ? "dark-mode subTitle achievement-subtitle text-centre"
+                  : "subTitle achievement-subtitle text-centre"
               }
             >
               {achievementSection.subtitle}

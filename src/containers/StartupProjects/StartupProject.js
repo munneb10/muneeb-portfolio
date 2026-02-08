@@ -214,8 +214,10 @@ export default function StartupProject() {
     <>
       <div className="main" id="projects">
         <div id="creativePortfolio">
-          <h1 className="skills-heading">{bigProjects.title}</h1>
+          <div className="text-centre">
+            <h1 className="skills-heading">{bigProjects.title}</h1>
           <p className="subTitle project-subtitle">{bigProjects.subtitle}</p>
+          </div>
 
           {/* Categories */}
           <div className="project-categories">

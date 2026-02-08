@@ -23,7 +23,7 @@ const greeting = {
   username: "Muneeb Arif",
   title: "Hi all, I'm Muneeb",
   subTitle: emoji(
-    "Software Engineer and Master’s student with professional experience building production-level frontend applications using Angular / React and modern JavaScript. Strong foundation in data structures, databases, and system fundamentals, with hands-on exposure to AWS and full-stack development."
+    "Software Engineer with professional experience building production-level frontend applications using Angular / React and modern JavaScript. Strong foundation in data structures, databases, and system fundamentals, with hands-on exposure to AWS and full-stack development."
   ),
   resumeLink:
     "https://drive.google.com/file/d/1mmeWxEnrbt7yTP0ZVZSEfMJj5FuSwStG/view?usp=sharing", // Set to empty to hide the button

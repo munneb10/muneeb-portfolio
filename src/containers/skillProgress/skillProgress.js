@@ -3,79 +3,46 @@ import "./Progress.scss";
 import { Fade } from "react-reveal";
 
 export default function StackProgress() {
-  const skillsByCategory = {
-    title: "Skills",
-    subtitle: "What I’m confident building and shipping in production.",
-    display: true,
-    categories: [
-      {
-        title: "Frontend Engineering",
-        iconClass: "fas fa-laptop-code",
-        highlights: ["Component Architecture", "State Management", "UX Performance"],
-        skills: ["React", "Angular", "TypeScript", "JavaScript (ES6+)", "RxJS", "HTML", "CSS/SCSS"]
-      },
-      {
-        title: "Backend & APIs",
-        iconClass: "fas fa-server",
-        highlights: ["REST APIs", "Auth Systems", "Validation & Middleware"],
-        skills: ["Node.js", "FastAPI", "Django", "REST", "JWT", "OAuth2 / PKCE"]
-      },
-      {
-        title: "Databases",
-        iconClass: "fas fa-database",
-        highlights: ["Schema Design", "Query Optimization", "Indexes"],
-        skills: ["PostgreSQL", "SQL", "SQLite", "Normalization", "B+ Trees (concept)"]
-      },
-      {
-        title: "Cloud & Tooling",
-        iconClass: "fas fa-cloud",
-        highlights: ["Deployment", "Version Control", "Automation"],
-        skills: ["AWS (Core Services)", "Git", "CI/CD", "Linux Basics", "Netlify"]
-      },
-      {
-        title: "Engineering Fundamentals",
-        iconClass: "fas fa-sitemap",
-        highlights: ["DSA", "System Design", "Trade-offs"],
-        skills: ["Graphs", "Distributed Transactions", "Systems Thinking"]
-      }
-    ]
-  };
-
-  if (!skillsByCategory.display) return null;
+  const skillsData = [
+    {
+      title: "Frontend",
+      skills: ["React", "Angular", "TypeScript", "JavaScript", "HTML", "CSS/SCSS", "RxJS"]
+    },
+    {
+      title: "Backend & APIs",
+      skills: ["Node.js", "Django", "FastAPI", "REST", "JWT", "OAuth2"]
+    },
+    {
+      title: "Databases",
+      skills: ["PostgreSQL", "SQL", "SQLite", "Normalization", "Indexes"]
+    },
+    {
+      title: "Cloud & Tooling",
+      skills: ["AWS", "Git", "CI/CD", "Linux", "Netlify"]
+    },
+    {
+      title: "Engineering Fundamentals",
+      skills: ["DSA", "System Design", "Graphs", "Distributed Transactions"]
+    }
+  ];
 
   return (
-    <Fade bottom duration={1000} distance="20px">
-      <section className="skillsCat" id="skills">
-        <div className="skillsCat__head">
-          <h1 className="skillsCat__title">{skillsByCategory.title}</h1>
-          <p className="skillsCat__subtitle">{skillsByCategory.subtitle}</p>
-        </div>
+    <Fade bottom duration={800}>
+      <section className="skillsSection" id="skills">
+        <h1 className="skillsTitle" style={{marginTop: '5px !important'}}>Skills</h1>
+        <p className="skillsSubtitle">
+          What I’m confident building and shipping in production.
+        </p>
 
-        <div className="skillsCat__grid">
-          {skillsByCategory.categories.map((cat, idx) => (
-            <div key={idx} className="skillsCat__card">
-              <div className="skillsCat__cardTop">
-                <div className="skillsCat__icon">
-                  <i className={cat.iconClass} />
-                </div>
+        <div className="skillsGrid">
+          {skillsData.map((group, idx) => (
+            <div key={idx} className="skillsCard">
+              <h3 className="skillsCardTitle">{group.title}</h3>
 
-                <div>
-                  <h3 className="skillsCat__cardTitle">{cat.title}</h3>
-
-                  <div className="skillsCat__highlights">
-                    {cat.highlights.map((h, i) => (
-                      <span key={i} className="skillsCat__highlight">
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="skillsCat__tags">
-                {cat.skills.map((s, i) => (
-                  <span key={i} className="skillsCat__tag">
-                    {s}
+              <div className="skillsPillsGrid">
+                {group.skills.map((skill, i) => (
+                  <span key={i} className="skillPill">
+                    {skill}
                   </span>
                 ))}
               </div>
