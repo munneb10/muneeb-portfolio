@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./Progress.scss";
 import { Fade } from "react-reveal";
-import StyleContext from "../../contexts/StyleContext";
 
 export default function StackProgress() {
-  const { isDark } = useContext(StyleContext);
-
   const skillsByCategory = {
     title: "Skills",
     subtitle: "What I’m confident building and shipping in production.",
@@ -27,7 +24,7 @@ export default function StackProgress() {
         title: "Databases",
         iconClass: "fas fa-database",
         highlights: ["Schema Design", "Query Optimization", "Indexes"],
-        skills: ["PostgreSQL", "SQL", "Normalization", "B+ Trees (concept)", "SQLite"]
+        skills: ["PostgreSQL", "SQL", "SQLite", "Normalization", "B+ Trees (concept)"]
       },
       {
         title: "Cloud & Tooling",
@@ -39,7 +36,7 @@ export default function StackProgress() {
         title: "Engineering Fundamentals",
         iconClass: "fas fa-sitemap",
         highlights: ["DSA", "System Design", "Trade-offs"],
-        skills: ["Graphs", "Distributed Transactions (Saga/2PC)", "Systems Thinking"]
+        skills: ["Graphs", "Distributed Transactions", "Systems Thinking"]
       }
     ]
   };
@@ -48,10 +45,7 @@ export default function StackProgress() {
 
   return (
     <Fade bottom duration={1000} distance="20px">
-      <section
-        className={`skillsCat ${isDark ? "skillsCat--dark" : ""}`}
-        id="skills"
-      >
+      <section className="skillsCat" id="skills">
         <div className="skillsCat__head">
           <h1 className="skillsCat__title">{skillsByCategory.title}</h1>
           <p className="skillsCat__subtitle">{skillsByCategory.subtitle}</p>

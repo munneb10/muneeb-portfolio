@@ -1,87 +1,19 @@
-@import "../../_globalColor";
-
-.meter {
-  height: 20px;
-  position: relative;
-  background: $progressBarBackground;
-  -moz-border-radius: 25px;
-  -webkit-border-radius: 25px;
-  border-radius: 25px;
-}
-.meter > span {
-  display: block;
-  height: 100%;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  background-color: $progressBarSpanBG;
-  position: relative;
-  overflow: hidden;
-}
-.skill {
-  line-height: 3.5vw;
-}
-.skill-bars {
-  font-size: 28px;
-  width: 40%;
-}
-.skills-container {
-  display: flex;
-  width: 90%;
-  padding: 20px 10px;
-  margin: 0px auto;
-  margin-top: 2rem;
-}
-.skills-container > * {
-  flex: 1;
-  margin-bottom: 30px;
-}
-.skills-image > img {
-  margin-left: 80px;
-  max-width: 90%;
-  height: auto;
-}
-
-/* Media Query */
-
-@media (max-width: 1456px) {
-  .skills-bar {
-    line-height: 4rem;
-  }
-  .skills-image {
-    display: none;
-    order: 2;
-  }
-}
-
-@media (max-width: 768px) {
-  .skills-container {
-    flex-direction: column;
-  }
-  .skills-bar {
-    line-height: 3rem;
-    margin: 20px;
-  }
-  .skills-image {
-    display: none;
-    order: 2;
-  }
-}
-
+/* ===============================
+   Skills Categories (NEW SYSTEM)
+================================ */
 
 .skillsCat {
-  margin-top: 40px;
-  padding: 0 10px;
+  margin-top: 60px;
+  padding: 0 16px;
 }
 
 .skillsCat__head {
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 28px;
 }
 
 .skillsCat__title {
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 900;
 }
 
@@ -89,50 +21,61 @@
   max-width: 720px;
   margin: 10px auto 0;
   font-size: 18px;
-  opacity: 0.75;
+  opacity: 0.7;
 }
+
+/* Grid */
 
 .skillsCat__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+  gap: 22px;
   justify-content: center;
 }
 
+/* Card */
+
 .skillsCat__card {
-  background: #fff;
-  border-radius: 18px;
-  padding: 18px;
-  border: 1px solid rgba(0,0,0,0.08);
-  transition: 0.2s;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .skillsCat__card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.12);
 }
+
+/* Top row */
 
 .skillsCat__cardTop {
   display: flex;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .skillsCat__icon {
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.18);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 }
+
+/* Title */
 
 .skillsCat__cardTitle {
   margin: 0;
   font-size: 20px;
   font-weight: 800;
 }
+
+/* Highlights */
 
 .skillsCat__highlights {
   display: flex;
@@ -143,11 +86,13 @@
 
 .skillsCat__highlight {
   font-size: 12px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.15);
   background: rgba(0,0,0,0.03);
 }
+
+/* Skill tags */
 
 .skillsCat__tags {
   display: flex;
@@ -157,21 +102,20 @@
 
 .skillsCat__tag {
   font-size: 13px;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.03);
 }
 
-/* Dark Mode */
-.skillsCat--dark .skillsCat__card {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.14);
-}
+/* Mobile */
 
-.skillsCat--dark .skillsCat__highlight,
-.skillsCat--dark .skillsCat__tag,
-.skillsCat--dark .skillsCat__icon {
-  border-color: rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.06);
+@media (max-width: 600px) {
+  .skillsCat__title {
+    font-size: 32px;
+  }
+
+  .skillsCat__grid {
+    grid-template-columns: 1fr;
+  }
 }
