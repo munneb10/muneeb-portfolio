@@ -1,0 +1,177 @@
+@import "../../_globalColor";
+
+.meter {
+  height: 20px;
+  position: relative;
+  background: $progressBarBackground;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+}
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: $progressBarSpanBG;
+  position: relative;
+  overflow: hidden;
+}
+.skill {
+  line-height: 3.5vw;
+}
+.skill-bars {
+  font-size: 28px;
+  width: 40%;
+}
+.skills-container {
+  display: flex;
+  width: 90%;
+  padding: 20px 10px;
+  margin: 0px auto;
+  margin-top: 2rem;
+}
+.skills-container > * {
+  flex: 1;
+  margin-bottom: 30px;
+}
+.skills-image > img {
+  margin-left: 80px;
+  max-width: 90%;
+  height: auto;
+}
+
+/* Media Query */
+
+@media (max-width: 1456px) {
+  .skills-bar {
+    line-height: 4rem;
+  }
+  .skills-image {
+    display: none;
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    flex-direction: column;
+  }
+  .skills-bar {
+    line-height: 3rem;
+    margin: 20px;
+  }
+  .skills-image {
+    display: none;
+    order: 2;
+  }
+}
+
+
+.skillsCat {
+  margin-top: 40px;
+  padding: 0 10px;
+}
+
+.skillsCat__head {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.skillsCat__title {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.skillsCat__subtitle {
+  max-width: 720px;
+  margin: 10px auto 0;
+  font-size: 18px;
+  opacity: 0.75;
+}
+
+.skillsCat__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
+  gap: 18px;
+  justify-content: center;
+}
+
+.skillsCat__card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.skillsCat__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+.skillsCat__cardTop {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.skillsCat__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skillsCat__cardTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.skillsCat__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.skillsCat__highlight {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.03);
+}
+
+.skillsCat__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillsCat__tag {
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.02);
+}
+
+/* Dark Mode */
+.skillsCat--dark .skillsCat__card {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+}
+
+.skillsCat--dark .skillsCat__highlight,
+.skillsCat--dark .skillsCat__tag,
+.skillsCat--dark .skillsCat__icon {
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+}
