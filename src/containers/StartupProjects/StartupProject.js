@@ -59,6 +59,10 @@ export default function StartupProject() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [openProject, setOpenProject] = useState(null);
 
+  // ✅ Pagination state
+  const PAGE_SIZE = 2; // change if you want (e.g. 4/6/8)
+  const [page, setPage] = useState(1);
+
   // Categories from data
   const categories = useMemo(() => {
     const set = new Set();
@@ -71,17 +75,35 @@ export default function StartupProject() {
     if (!categories.includes(activeCategory)) setActiveCategory("All");
   }, [categories, activeCategory]);
 
+  // Reset to page 1 when category changes
+  useEffect(() => {
+    setPage(1);
+  }, [activeCategory]);
+
   // Filter + dedupe
   const filteredProjects = useMemo(() => {
     const raw = bigProjects.projects || [];
 
     if (activeCategory === "All") return dedupeProjectsStrict(raw);
 
-    const inCategory = raw.filter(
-      (p) => (p.category || "Other") === activeCategory
-    );
+    const inCategory = raw.filter((p) => (p.category || "Other") === activeCategory);
     return dedupeProjectsStrict(inCategory);
   }, [activeCategory]);
+
+  // ✅ Pagination derived values
+  const total = filteredProjects.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+  // Clamp page if data changes
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+    if (page < 1) setPage(1);
+  }, [page, totalPages]);
+
+  const paginatedProjects = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return filteredProjects.slice(start, start + PAGE_SIZE);
+  }, [filteredProjects, page]);
 
   // ESC closes modal
   useEffect(() => {
@@ -94,8 +116,7 @@ export default function StartupProject() {
 
   if (!bigProjects.display) return null;
 
-  const techList =
-    openProject?.techStack || openProject?.modal?.techStack || [];
+  const techList = openProject?.techStack || openProject?.modal?.techStack || [];
 
   // Portal modal -> always relative to body (production-safe)
   const modalNode =
@@ -107,10 +128,7 @@ export default function StartupProject() {
             aria-modal="true"
             onClick={() => setOpenProject(null)}
           >
-            <div
-              className="project-modal"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="project-modal" onClick={(e) => e.stopPropagation()}>
               <button
                 className="project-modal-close"
                 type="button"
@@ -121,13 +139,9 @@ export default function StartupProject() {
               </button>
 
               <div className="project-modal-header">
-                <h2 className="project-modal-title">
-                  {openProject.modal.title}
-                </h2>
+                <h2 className="project-modal-title">{openProject.modal.title}</h2>
                 {openProject.modal.greeting ? (
-                  <p className="project-modal-greeting">
-                    {openProject.modal.greeting}
-                  </p>
+                  <p className="project-modal-greeting">{openProject.modal.greeting}</p>
                 ) : null}
               </div>
 
@@ -140,9 +154,7 @@ export default function StartupProject() {
                   {openProject.modal.email ? (
                     <p className="project-modal-email">
                       <strong>Email:</strong>{" "}
-                      <a href={`mailto:${openProject.modal.email}`}>
-                        {openProject.modal.email}
-                      </a>
+                      <a href={`mailto:${openProject.modal.email}`}>{openProject.modal.email}</a>
                     </p>
                   ) : null}
 
@@ -165,15 +177,10 @@ export default function StartupProject() {
 
                   {Array.isArray(techList) && techList.length ? (
                     <div className="project-modal-tech">
-                      <h3 className="project-modal-tech-title">
-                        Technologies used
-                      </h3>
+                      <h3 className="project-modal-tech-title">Technologies used</h3>
                       <div className="project-modal-tech-tags">
                         {techList.map((t, idx) => (
-                          <span
-                            key={`${t}-${idx}`}
-                            className="project-modal-tech-tag"
-                          >
+                          <span key={`${t}-${idx}`} className="project-modal-tech-tag">
                             {t}
                           </span>
                         ))}
@@ -210,13 +217,30 @@ export default function StartupProject() {
         )
       : null;
 
+  // ✅ Pagination UI: show max 5 buttons around current page
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const pageButtons = useMemo(() => {
+    const maxBtns = 5;
+    let start = Math.max(1, page - Math.floor(maxBtns / 2));
+    let end = start + maxBtns - 1;
+
+    if (end > totalPages) {
+      end = totalPages;
+      start = Math.max(1, end - maxBtns + 1);
+    }
+
+    const arr = [];
+    for (let i = start; i <= end; i++) arr.push(i);
+    return arr;
+  }, [page, totalPages]);
+
   return (
     <>
       <div className="main" id="projects">
         <div id="creativePortfolio">
           <div className="text-centre">
             <h1 className="skills-heading">{bigProjects.title}</h1>
-          <p className="subTitle project-subtitle">{bigProjects.subtitle}</p>
+            <p className="subTitle project-subtitle">{bigProjects.subtitle}</p>
           </div>
 
           {/* Categories */}
@@ -225,9 +249,7 @@ export default function StartupProject() {
               <button
                 key={cat}
                 type="button"
-                className={`project-category-btn ${
-                  activeCategory === cat ? "active" : ""
-                }`}
+                className={`project-category-btn ${activeCategory === cat ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat)}
               >
                 {cat}
@@ -235,9 +257,9 @@ export default function StartupProject() {
             ))}
           </div>
 
-          {/* Cards */}
-          <div className="projects-container">
-            {filteredProjects.map((project) => {
+          {/* Cards (✅ one column) */}
+          <div className="projects-container projects-container--single">
+            {paginatedProjects.map((project) => {
               const githubUrl = project?.actions?.github;
               const liveUrl = project?.actions?.live;
               const canOpenInfo = project?.actions?.info && project?.modal;
@@ -297,20 +319,14 @@ export default function StartupProject() {
 
                   <div className="project-content">
                     <h3 className="project-title">{project.projectName}</h3>
-                    <div className="project-meta">
-                      {project.category || "Other"}
-                    </div>
+                    <div className="project-meta">{project.category || "Other"}</div>
                     <p className="project-desc">{project.projectDesc}</p>
 
                     {/* Tech preview */}
-                    {Array.isArray(project.techStack) &&
-                    project.techStack.length ? (
+                    {Array.isArray(project.techStack) && project.techStack.length ? (
                       <div className="project-tech-preview">
                         {project.techStack.slice(0, 4).map((t, idx) => (
-                          <span
-                            key={`${t}-${idx}`}
-                            className="project-tech-pill"
-                          >
+                          <span key={`${t}-${idx}`} className="project-tech-pill">
                             {t}
                           </span>
                         ))}
@@ -327,8 +343,62 @@ export default function StartupProject() {
             })}
           </div>
 
-          {filteredProjects.length === 0 ? (
-            <p className="project-empty">No projects in this category yet.</p>
+          {total === 0 ? <p className="project-empty">No projects in this category yet.</p> : null}
+
+          {/* ✅ Pagination */}
+          {total > PAGE_SIZE ? (
+            <div className="project-pagination">
+              <button
+                type="button"
+                className="project-page-btn"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+              >
+                Prev
+              </button>
+
+              {pageButtons[0] > 1 ? (
+                <>
+                  <button type="button" className="project-page-btn" onClick={() => setPage(1)}>
+                    1
+                  </button>
+                  <span className="project-page-ellipsis">…</span>
+                </>
+              ) : null}
+
+              {pageButtons.map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  className={`project-page-btn ${p === page ? "active" : ""}`}
+                  onClick={() => setPage(p)}
+                >
+                  {p}
+                </button>
+              ))}
+
+              {pageButtons[pageButtons.length - 1] < totalPages ? (
+                <>
+                  <span className="project-page-ellipsis">…</span>
+                  <button
+                    type="button"
+                    className="project-page-btn"
+                    onClick={() => setPage(totalPages)}
+                  >
+                    {totalPages}
+                  </button>
+                </>
+              ) : null}
+
+              <button
+                type="button"
+                className="project-page-btn"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+              >
+                Next
+              </button>
+            </div>
           ) : null}
         </div>
       </div>

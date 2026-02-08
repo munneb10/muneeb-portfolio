@@ -1,4 +1,17 @@
 /* ===============================
+   StartupProjects.scss (LIGHT ONLY)
+   Production-safe, no duplicates
+================================ */
+
+#creativePortfolio {
+  width: 100%;
+}
+
+.text-centre {
+  text-align: center;
+}
+
+/* ===============================
    CATEGORY TABS
 ================================ */
 .project-categories {
@@ -10,17 +23,18 @@
 }
 
 .project-category-btn {
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   background: transparent;
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .project-category-btn:hover {
   transform: translateY(-1px);
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 .project-category-btn.active {
@@ -28,14 +42,21 @@
 }
 
 /* ===============================
-   GRID
+   PROJECT GRID
+   Default: single column
 ================================ */
 .projects-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
   gap: 22px;
   justify-content: center;
   margin-top: 18px;
+}
+
+/* ✅ Enforced one column at a time */
+/* ✅ 2 projects per row */
+.projects-container--single {
+  grid-template-columns: repeat(2, minmax(0, 520px));
+  justify-content: center;
 }
 
 /* ===============================
@@ -46,7 +67,7 @@
   border-radius: 18px;
   overflow: hidden;
   background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   min-height: 340px;
@@ -55,21 +76,22 @@
 
 .project-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
 }
 
 /* Image */
 .project-media {
   width: 100%;
-  height: 180px;
+  height: 210px;
   overflow: hidden;
-  background: #f2f2f2;
+  background: #f3f3f3;
 }
 
 .project-media-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.35s ease;
 }
 
@@ -79,7 +101,7 @@
 
 /* Content */
 .project-content {
-  padding: 18px;
+  padding: 18px 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -89,6 +111,7 @@
   font-size: 22px;
   font-weight: 800;
   margin: 0;
+  line-height: 1.2;
 }
 
 .project-meta {
@@ -99,12 +122,20 @@
 
 .project-desc {
   font-size: 16px;
-  line-height: 1.45;
-  opacity: 0.8;
+  line-height: 1.5;
+  opacity: 0.82;
+  margin: 6px 0 0;
+}
+
+/* Empty */
+.project-empty {
+  margin-top: 14px;
+  text-align: center;
+  opacity: 0.65;
 }
 
 /* ===============================
-   TECH PILLS
+   TECH PILLS (Card)
 ================================ */
 .project-tech-preview {
   margin-top: 12px;
@@ -118,8 +149,8 @@
   font-weight: 600;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.15);
-  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .project-tech-more {
@@ -137,12 +168,14 @@
   gap: 10px;
   opacity: 0;
   pointer-events: none;
-  transition: 0.2s ease;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .project-card:hover .project-actions {
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
 
 .project-action-btn {
@@ -150,11 +183,17 @@
   height: 42px;
   border-radius: 999px;
   border: none;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.72);
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.project-action-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .project-action-btn i {
@@ -163,13 +202,58 @@
 }
 
 /* ===============================
+   PAGINATION
+================================ */
+.project-pagination {
+  margin-top: 26px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.project-page-btn {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.project-page-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+.project-page-btn.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.project-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.project-page-ellipsis {
+  opacity: 0.6;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+/* ===============================
    MODAL BACKDROP
 ================================ */
 .project-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 9999;
+
   display: grid;
   place-items: center;
   padding: 16px;
@@ -187,6 +271,7 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
 }
 
 /* Close */
@@ -201,19 +286,31 @@
   background: #f2f2f2;
   cursor: pointer;
   font-size: 18px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.project-modal-close:hover {
+  transform: translateY(-1px);
+  background: #e8e8e8;
 }
 
 /* Header */
 .project-modal-header {
-  padding: 22px;
+  padding: 22px 22px 10px;
 }
 
 .project-modal-title {
   margin: 0 0 8px;
   font-size: 26px;
+  font-weight: 900;
 }
 
-/* Body Scroll */
+.project-modal-greeting {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Body Scroll (important: min-height:0) */
 .project-modal-body {
   flex: 1;
   min-height: 0;
@@ -229,6 +326,11 @@
 .project-modal-body-scroll p {
   font-size: 16px;
   line-height: 1.7;
+  margin: 10px 0;
+}
+
+.project-modal-email {
+  margin-top: 12px;
 }
 
 /* Images */
@@ -239,11 +341,45 @@
   gap: 14px;
 }
 
+.project-modal-figure {
+  margin: 0;
+}
+
 .project-modal-figure img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: 12px;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Tech */
+.project-modal-tech {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.project-modal-tech-title {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.project-modal-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-modal-tech-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 /* Footer */
@@ -251,7 +387,8 @@
   padding: 18px 22px;
   display: flex;
   gap: 14px;
-  border-top: 1px solid rgba(0,0,0,0.08);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
 }
 
 .project-modal-btn {
@@ -260,16 +397,29 @@
   border: none;
   background: #000;
   color: #fff;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.project-modal-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
 }
 
 /* ===============================
    MOBILE
 ================================ */
-@media (max-width: 520px) {
-  .projects-container {
+@media (max-width: 600px) {
+  .projects-container--single {
     grid-template-columns: 1fr;
+  }
+
+  .project-media {
+    height: 170px;
   }
 
   .project-title {
@@ -281,7 +431,7 @@
   }
 
   .project-modal-header {
-    padding: 16px;
+    padding: 16px 16px 8px;
   }
 
   .project-modal-body {
@@ -291,8 +441,18 @@
   .project-modal-footer {
     padding: 14px 16px;
   }
+
+  .project-modal-images {
+    grid-template-columns: 1fr;
+  }
+
+  .project-modal-figure img {
+    height: 160px;
+  }
 }
 
-.text-centre{
-  text-align: center;
+@media (max-width: 900px) {
+  .projects-container--single {
+    grid-template-columns: 1fr;
+  }
 }
