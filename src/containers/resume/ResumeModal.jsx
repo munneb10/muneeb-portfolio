@@ -13,7 +13,7 @@ export default function ResumeModal({ isOpen, onClose, isDark }) {
 
   if (!isOpen) return null;
 
-  const RESUME_URL = "/resume.pdf"; // ✅ put resume.pdf in /public
+  const RESUME_URL = "/resume-v2.pdf"; // ✅ put resume.pdf in /public
 
   return ReactDOM.createPortal(
     <div className="resumeModalBackdrop" role="dialog" aria-modal="true" onClick={onClose}>
